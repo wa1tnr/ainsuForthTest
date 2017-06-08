@@ -28,5 +28,13 @@ An Arduino M0 Pro is also available.
 
 Wanted: the Metro version of the M0 Express.
 
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+NOTE: The obvious difference between the test directory
+and the regular one is that the regular one does no
+work -- most of the code in it is commented out.  In
+the test directory, that is not the case -- all the
+code is present -- it is a working Forth.
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+
                                                   wa1tnr
                                             08 June 2017.
