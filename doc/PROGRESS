@@ -1,0 +1,32 @@
+Thu Jun  8 04:03:40 UTC 2017
+
+ainsuForthTest/src/kernel/
+  do_sys.cpp
+  do_sys.h
+  dot_quote.cpp
+  dot_quote.h
+  quit.cpp
+  quit.h
+
+All appear to compile and play their roles in a working
+Forth (essentially, this is an unmodified YAFFA-ARM Forth
+at this juncture).
+
+The purpose of the test version is to compile the src
+directory into the Forth, replacing every function that
+is commented-out of the original file with the same code
+in a separate file (under src/kernel).
+
+In this way, not too much effort is made to port the code
+from the base directory into the src/kernel directory,
+in an unverified state.
+
+The ideas seem to be producing expected results.
+
+The Adafruit Feather M0 Express is the hardware tested.
+An Arduino M0 Pro is also available.
+
+Wanted: the Metro version of the M0 Express.
+
+                                                  wa1tnr
+                                            08 June 2017.
