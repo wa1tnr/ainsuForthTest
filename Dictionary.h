@@ -24,6 +24,6 @@
 // #include "src/kernel/subroutine.h"
 // #include "src/kernel/zjump.h"
 
- 27 /**  File: YAFFA-ARM.ino                                                            **/
- 28 "../ainsuForth/Dictionary.h"
+// /**  File: YAFFA-ARM.ino                                                            **/
+// "../ainsuForth/Dictionary.h"
 
