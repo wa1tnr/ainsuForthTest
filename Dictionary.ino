@@ -20,7 +20,7 @@
 /**  along with YAFFA.  If not, see <http://www.gnu.org/licenses/>.          **/
 /**                                                                          **/
 /******************************************************************************/
-#include "YAFFA.h"
+#include "yaffa.h"
 
 const char not_done_str[] = " NOT Implemented Yet \n\r";
 
