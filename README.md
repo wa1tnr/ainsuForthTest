@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # ainsuForth
 
 TEST.  IGNORE.
@@ -19,3 +20,7 @@ YAFFA for Arduino ARM Processors
 See:
  [ https://github.com/sdwood68/YAFFA-ARM ]
 
+=======
+# ainsuForthTest
+Test.
+>>>>>>> f9e14942cd4650a6fdbda8c8a9b01421bebcab84
