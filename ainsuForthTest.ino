@@ -1,6 +1,6 @@
 /******************************************************************************/
 /**  YAFFA - Yet Another Forth for Arduino                                   **/
-//   Version 0.7.0   I.  TEST DIRECTORY
+//   Version 0.7.0   I.b.  TEST DIRECTORY
 /**                                                                          **/
 /**  File: YAFFA.ino                                                         **/
 /**  Copyright (C) 2012 Stuart Wood (swood@rochester.rr.com)                 **/
@@ -283,7 +283,7 @@ void setup(void) {
   Serial.print((size_t)&forthSpace[0], HEX);
   Serial.print(", Ends at $");
   Serial.println((size_t)&forthSpace[FORTH_SIZE] - 1, HEX);
-  delay(30000); Serial.println("ainsuForthTest 08 Jun 2017.");
+  delay(12 *1000); Serial.println("ainsuForthTest 08 Jun 2017.");
   Serial.print(prompt_str);
 }
 
