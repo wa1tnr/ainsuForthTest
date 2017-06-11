@@ -1,9 +1,29 @@
-
 /**  YAFFA - Yet Another Forth for Arduino                                   **/
 // scroll to end of file for intellectual property notices - wa1tnr
 
 #ifndef __YAFFA_H__
 #define __YAFFA_H__
+
+#define EXT_KERN_DROP
+// #define INT_KERN_DROP
+
+#define EXT_KERN_EQ
+// #define INT_KERN_EQ
+
+#define EXT_KERN_EVALUATE
+// #define INT_KERN_EVALUATE
+
+#define EXT_KERN_EXIT
+// #define INT_KERN_EXIT
+
+#define EXT_KERN_OVER
+// #define INT_KERN_OVER
+
+#define EXT_KERN_S_QUOTE
+// #define INT_KERN_S_QUOTE
+
+#define EXT_KERN_VARIABLE
+// #define INT_KERN_VARIABLE
 
 #define EXT_KERN_THROW
 // #define INT_KERN_THROW

@@ -543,6 +543,7 @@ void _lt_number_sign(void) {
   flags |= NUM_PROC;
 }
 
+#ifdef INT_KERN_EQ
 const char eq_str[] = "=";
 // ( x1 x2 -- flag )
 // flag is true if and only if x1 is bit for bit the same as x2
@@ -550,6 +551,7 @@ void _eq(void) {
   if (dStack_pop() == dStack_pop()) dStack_push(TRUE);
   else dStack_push(FALSE);
 }
+#endif
 
 const char gt_str[] = ">";
 // ( n1 n2 -- flag )
@@ -916,12 +918,14 @@ void _does(void) {
   // Start Subroutine coding
 }
 
+#ifdef INT_KERN_DROP
 const char drop_str[] = "drop";
 // ( x -- )
 // Remove x from stack
 void _drop(void) {
   dStack_pop();
 }
+#endif
 
 const char dupe_str[] = "dup";
 // ( x -- x x )
@@ -1065,6 +1069,7 @@ void _execute(void) {
   }
 }
 
+#ifdef INT_KERN_EXIT
 const char exit_str[] = "exit";
 // Interpretation: undefined
 // Execution: ( -- ) (R: nest-sys -- )
@@ -1074,6 +1079,7 @@ const char exit_str[] = "exit";
 void _exit(void) {
   ip = (cell_t*)rStack_pop();
 }
+#endif
 
 const char fill_str[] = "fill";
 // ( c-addr u char -- )
@@ -1332,11 +1338,13 @@ void _or(void) {
   dStack_push(dStack_pop() |  dStack_pop());
 }
 
+#ifdef INT_KERN_OVER
 const char over_str[] = "over";
 // ( x1 x2 -- x1 x2 x1 )
 void _over(void) {
   dStack_push(dStack_peek(1));
 }
+#endif
 
 const char postpone_str[] = "postpone";
 // Compilation: ( "<spaces>name" -- )
@@ -1442,6 +1450,7 @@ void _rshift(void) {
   dStack_push((ucell_t)x1 >> u);
 }
 
+#ifdef INT_KERN_S_QUOTE
 const char s_quote_str[] = "s\x22"; 
 // Interpretation: Interpretation semantics for this word are undefined.
 // Compilation: ("ccc<quote>" -- )
@@ -1478,6 +1487,7 @@ void _s_quote(void) {
     cDelimiter = ' ';
   }
 }
+#endif
 
 const char s_to_d_str[] = "s>d";
 // ( n -- d )
@@ -1635,6 +1645,7 @@ void _until(void) {
   pHere += 1;
 }
 
+#ifdef INT_KERN_VARIABLE
 const char variable_str[] = "variable";
 // ( "<spaces>name" -- )
 // Parse name delimited by a space. Create a definition for name with the
@@ -1653,6 +1664,7 @@ void _variable(void) {
     closeEntry();
   }
 }
+#endif
 
 const char while_str[] = "while";
 // Interpretation: Undefine
