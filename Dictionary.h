@@ -17,6 +17,7 @@
 #include "src/kernel/throw.h"
 #include "src/kernel/type.h"
 #include "src/kernel/variable.h"
+#include "src/kernel/warm.h"
 #include "src/kernel/zjump.h"
 
 // /**  File: YAFFA-ARM.ino                                                            **/

@@ -1,4 +1,8 @@
-// KRILL BELUGA  - PBTJUX FDXRV 11 JUNE 02:35z
+// Sun Jun 11 03:04:45 UTC 2017
+
+// includes 'warm' word -- warm boot the system from the cli
+
+// MOKTOG KRILL BELUGA  - PBTJUX FDXRV 11 JUNE 02:35z
 
 /******************************************************************************/
 /**  YAFFA - Yet Another Forth for Arduino                                   **/
@@ -285,7 +289,7 @@ void setup(void) {
   Serial.print((size_t)&forthSpace[0], HEX);
   Serial.print(", Ends at $");
   Serial.println((size_t)&forthSpace[FORTH_SIZE] - 1, HEX);
-  delay(2 *1000); Serial.println("ainsuForthTest 08 Jun 2017.");
+  delay(2 *1000); Serial.println("ainsuForthTest 11 Jun 2017 MOKTOG KRILL BELUGA.");
   Serial.print(prompt_str);
 }
 

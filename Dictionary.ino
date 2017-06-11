@@ -2325,6 +2325,7 @@ const flashEntry_t flashDict[] = {
   /* Order does not matter after here                  */
   /* Core Words                                        */
   /*****************************************************/
+  { warm_str,           _warm,            NORMAL },
   { abort_str,          _abort,           NORMAL },
   { store_str,          _store,           NORMAL },
   { number_sign_str,    _number_sign,     NORMAL },
