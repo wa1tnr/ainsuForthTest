@@ -15,6 +15,10 @@
 /**  but WITHOUT ANY WARRANTY; without even the implied warranty of          **/
 /**  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the           **/
 /**  GNU General Public License for more details.                            **/
+
+// progress
+// multiple throw but type and zjump good.
+
 /**                                                                          **/
 /**  You should have received a copy of the GNU General Public License       **/
 /**  along with YAFFA.  If not, see <http://www.gnu.org/licenses/>.          **/
@@ -28,35 +32,44 @@ const char not_done_str[] = " NOT Implemented Yet \n\r";
 /******************************************************************************/
 /**                       Primitives for Control Flow                        **/
 /******************************************************************************/
-const char jump_str[] = "jump";
+#ifdef INT_KERN_JUMP
+const char jump_str[] = "jump-int";
 void _jump(void) {
   ip = (cell_t*)((size_t)ip + *ip);
 }
+#endif
 
-const char zjump_str[] = "zjump";
+#ifdef INT_KERN_ZJUMP
+const char zjump_str[] = "zjump-int";
 void _zjump(void) {
   if (!dStack_pop()) ip = (cell_t*)((size_t)ip + *ip);
   else ip++;
 }
+#endif
 
-const char subroutine_str[] = "subroutine";
+#ifdef INT_KERN_SUBROUTINE
+const char subroutine_str[] = "subroutine-int";
 void _subroutine(void) {
   *pDoes = (cell_t)*ip++;
 }
+#endif
 
-// 46 const char do_sys_str[] = "do-sys";
-// 47 // ( n1|u1 n2|u2 -- ) (R: -- loop_sys )
-// 48 // Set up loop control parameters with index n2|u2 and limit n1|u1. An ambiguous
-// 49 // condition exists if n1|u1 and n2|u2 are not the same type. Anything already
-// 50 // on the return stack becomes unavailable until the loop-control parameters
-// 51 // are discarded.
-// 52 void _do_sys(void) {
-  // 53 rStack_push(LOOP_SYS);
-  // 54 rStack_push(dStack_pop());   // push index on to return stack
-  // 55 rStack_push(dStack_pop());   // push limit on to return stack
-// 56 }
+#ifdef INT_KERN_DO_SYS
+const char do_sys_str[] = "do-sys-int";
+// ( n1|u1 n2|u2 -- ) (R: -- loop_sys )
+// Set up loop control parameters with index n2|u2 and limit n1|u1. An ambiguous
+// condition exists if n1|u1 and n2|u2 are not the same type. Anything already
+// on the return stack becomes unavailable until the loop-control parameters
+// are discarded.
+void _do_sys(void) {
+  rStack_push(LOOP_SYS);
+  rStack_push(dStack_pop());   // push index on to return stack
+  rStack_push(dStack_pop());   // push limit on to return stack
+}
+#endif
 
-const char loop_sys_str[] = "loop-sys";
+#ifdef INT_KERN_LOOP_SYS
+const char loop_sys_str[] = "loop-sys-int";
 // ( n1|u1 n2|u2 -- ) (R: -- loop_sys )
 // Set up loop control parameters with index n2|u2 and limit n1|u1. An ambiguous
 // condition exists if n1|u1 and n2|u2 are not the same type. Anything already
@@ -79,8 +92,10 @@ void _loop_sys(void) {
     }
   }
 }
+#endif
 
-const char leave_sys_str[] = "leave-sys";
+#ifdef INT_KERN_LEAVE_SYS
+const char leave_sys_str[] = "leave-sys-int";
 // ( -- ) (R: loop-sys -- )
 // Discard the current loop control parameters. An ambiguous condition exists
 // if they are unavailable. Continue execution immediately following the
@@ -95,8 +110,10 @@ void _leave_sys(void) {
   }
   ip = (cell_t*)*ip;
 }
+#endif
 
-const char plus_loop_sys_str[] = "plus_loop-sys";
+#ifdef INT_KERN_PLUS_LOOP_SYS
+const char plus_loop_sys_str[] = "plus_loop-sys-int";
 // ( n1|u1 n2|u2 -- ) (R: -- loop_sys )
 // Set up loop control parameters with index n2|u2 and limit n1|u1. An ambiguous
 // condition exists if n1|u1 and n2|u2 are not the same type. Anything already
@@ -119,6 +136,7 @@ void _plus_loop_sys(void) {
     }
   }
 }
+#endif
 
 /*******************************************************************************/
 /**                          Core Forth Words                                 **/
@@ -313,39 +331,41 @@ void _dot(void) {
   displayValue();
 }
 
-// 316 const char dot_quote_str[] = ".\x22";
-// 317 // Compilation ("ccc<quote>" -- )
-// 318 // Parse ccc delimited by ". Append the run time semantics given below to
-// 319 // the current definition.
-// 320 // Run-Time ( -- )
-// 321 // Display ccc.
-// 322 void _dot_quote(void) {
-// 323   uint8_t i;
-// 324   char length;
-// 325   if (flags & EXECUTE) {
-// 326     Serial.print((char*)ip); // Print the string at the istuction pointer (ip)
-// 327     cell_t len = strlen((char*)ip) + 1;  // include null terminator
-// 328     ip = (cell_t*)((size_t)ip + len); // Move the ip to the end of the string 
-// 329     ALIGN_P(ip); // and align it.
-// 330   }
-// 331   else if (state) {
-// 332     cDelimiter = '"';
-// 333     if (!getToken()) {
-// 334       dStack_push(-16);
-// 335       _throw();
-// 336     }
-// 337     length = strlen(cTokenBuffer);
-// 338     *pHere++ = DOT_QUOTE_IDX;
-// 339     char *ptr = (char *) pHere;
-// 340     for (uint8_t i = 0; i < length; i++) {
-// 341       *ptr++ = cTokenBuffer[i];
-// 342     }
-// 343     *ptr++ = '\0';    // Terminate String
-// 344     pHere = (cell_t *)ptr;
-// 345     ALIGN_P(pHere);  // re- align the pHere for any new code
-// 346     cDelimiter = ' ';
-// 347   }
-// 348 }
+#ifdef INT_KERN_DOT_QUOTE
+const char dot_quote_str[] = ".\x22-int";
+// Compilation ("ccc<quote>" -- )
+// Parse ccc delimited by ". Append the run time semantics given below to
+// the current definition.
+// Run-Time ( -- )
+// Display ccc.
+void _dot_quote(void) {
+  uint8_t i;
+  char length;
+  if (flags & EXECUTE) {
+    Serial.print((char*)ip); // Print the string at the istuction pointer (ip)
+    cell_t len = strlen((char*)ip) + 1;  // include null terminator
+    ip = (cell_t*)((size_t)ip + len); // Move the ip to the end of the string 
+    ALIGN_P(ip); // and align it.
+  }
+  else if (state) {
+    cDelimiter = '"';
+    if (!getToken()) {
+      dStack_push(-16);
+      _throw();
+    }
+    length = strlen(cTokenBuffer);
+    *pHere++ = DOT_QUOTE_IDX;
+    char *ptr = (char *) pHere;
+    for (uint8_t i = 0; i < length; i++) {
+      *ptr++ = cTokenBuffer[i];
+    }
+    *ptr++ = '\0';    // Terminate String
+    pHere = (cell_t *)ptr;
+    ALIGN_P(pHere);  // re- align the pHere for any new code
+    cDelimiter = ' ';
+  }
+}
+#endif
 
 const char slash_str[] = "/";
 // ( n1 n2 -- n3 )
@@ -1201,6 +1221,7 @@ void _leave(void) {
   *pHere++ = 0;
 }
 
+#ifdef INT_KERN_LITERAL
 const char literal_str[] = "literal";
 // Interpretation: undefined
 // Compilation: ( x -- )
@@ -1214,6 +1235,8 @@ void _literal(void) {
     dStack_push(*ip++);
   }
 }
+#endif
+
 
 const char loop_str[] = "loop";
 // Interpretation: undefined
@@ -1347,15 +1370,17 @@ void _postpone(void) {
   }
 }
 
-// 1350 const char quit_str[] = "quit";
-// 1351 // ( -- ) (R: i*x -- )
-// 1352 // Empty the return stack, store zero in SOURCE-ID if it is present,
-// 1353 // make the user input device the input source, enter interpretation state.
-// 1354 void _quit(void) {
-// 1355   rStack_clear();
-// 1356   *cpToIn = 0;          // Terminate buffer to stop interpreting
-// 1357   Serial.flush();
-// 1358 }
+#ifdef INT_KERN_QUIT
+const char quit_str[] = "quit-int";
+// ( -- ) (R: i*x -- )
+// Empty the return stack, store zero in SOURCE-ID if it is present,
+// make the user input device the input source, enter interpretation state.
+void _quit(void) {
+  rStack_clear();
+  *cpToIn = 0;          // Terminate buffer to stop interpreting
+  Serial.flush();
+}
+#endif
 
 const char r_from_str[] = "r>";
 // Interpretation: undefined
@@ -1533,7 +1558,8 @@ void _then(void) {
   *orig = (size_t)pHere - (size_t)orig;
 }
 
-const char type_str[] = "type";
+#ifdef INT_KERN_TYPE
+const char type_str[] = "type-int";
 // ( c-addr u -- )
 // if u is greater than zero display character string specified by c-addr and u
 void _type(void) {
@@ -1542,6 +1568,7 @@ void _type(void) {
   for (char i = 0; i < length; i++)
     Serial.print(*addr++);
 }
+#endif
 
 const char u_dot_str[] = "u.";
 // ( u -- )
@@ -1958,7 +1985,8 @@ static void _endcase(void) {
 /**                             Exception Set                                 **/
 /*******************************************************************************/
 #ifdef EXCEPTION_SET
-const char throw_str[] = "throw";
+#ifdef INT_KERN_THROW
+const char throw_str[] = "throw-int";
 // ( k*x n -- k*x | i*x n)
 // if any bit of n are non-zero, pop the topmost exception frame from the
 // exception stack, along with everything on the return stack above that frame.
@@ -1986,6 +2014,7 @@ void _throw(void) {
   state = FALSE;
 }  
 #endif
+#endif // #ifdef INT_KERN_THROW
 
 /*******************************************************************************/
 /**                             Facility Set                                  **/

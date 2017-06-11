@@ -1,8 +1,5 @@
-// Wed Jun  7 21:40:26 UTC 2017
-// 4735-a0e
-
-#ifndef KERN_DOT_QUOTE
-#define KERN_DOT_QUOTE
+// Fri Jun  9 02:32:35 UTC 2017
+// 4735-a0f
 
 extern const char dot_quote_str[]; // = ".\x22";
 extern void _dot_quote(void);
@@ -21,4 +18,4 @@ extern uint8_t getToken(void);
 extern void dStack_push(cell_t value);
 extern void _throw(void);
 
-#endif
+// #endif

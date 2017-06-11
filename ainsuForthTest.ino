@@ -1,3 +1,5 @@
+// FDXRV 10 JUNE 22:55z
+
 /******************************************************************************/
 /**  YAFFA - Yet Another Forth for Arduino                                   **/
 //   Version 0.7.0   I.b.  TEST DIRECTORY
@@ -283,7 +285,7 @@ void setup(void) {
   Serial.print((size_t)&forthSpace[0], HEX);
   Serial.print(", Ends at $");
   Serial.println((size_t)&forthSpace[FORTH_SIZE] - 1, HEX);
-  delay(12 *1000); Serial.println("ainsuForthTest 08 Jun 2017.");
+  delay(2 *1000); Serial.println("ainsuForthTest 08 Jun 2017.");
   Serial.print(prompt_str);
 }
 
@@ -407,6 +409,13 @@ uint8_t getToken(void) {
   if (tokenIdx) return tokenIdx;
   else return 0;
 }
+
+// forward declarations ###bookmark 10 JUNE 2017 18:22z
+extern const char throw_str[]; // = "throw";
+extern void _throw(void);
+
+extern const char literal_str[]; // = "literal";
+extern void _literal(void);
 
 /******************************************************************************/
 /** Interpeter - Interprets a new string                                     **/

@@ -1,21 +1,12 @@
-// Wed Jun  7 01:08:31 UTC 2017
-// 4735-a0a
-
-// Tue Jun  6 22:16:24 UTC 2017
-// 4733-a9b
+// Fri Jun  9 02:32:35 UTC 2017
+// 4735-a0f
 
 #include <Arduino.h>
 #include "../../yaffa.h"
-#include "quit.h"
 // #include "Error_Codes.h"
 
-#ifdef KERNEL_QUIT
-
-// this is kernel stuff -- leave alone
-
-#endif // #ifdef KERNEL_QUIT
-
-// const char quit_str[] = "quit";
+#ifdef EXT_KERN_QUIT
+#include "quit.h"
 const char quit_str[] = "quit";
 void _quit(void) {
   rStack_clear();
@@ -23,4 +14,4 @@ void _quit(void) {
   Serial.flush();
 }
 
-// EOF
+#endif
