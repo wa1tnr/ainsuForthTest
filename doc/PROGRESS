@@ -1,3 +1,42 @@
+Sun Jun 11 03:08:12 UTC 2017
+
+  The warm word is present now.  Allows a warm boot from
+  the command line.
+
+  Words with individual source files, now in
+  src/kernel include:
+
+      do_sys.cpp do_sys.h dot_quote.cpp dot_quote.h
+      drop.cpp drop.h eq.cpp eq.h exit.cpp exit.h
+      jump.cpp jump.h leave_sys.cpp leave_sys.h
+      literal.cpp literal.h loop_sys.cpp loop_sys.h
+      over.cpp over.h plus_loop_sys.cpp plus_loop_sys.h
+      quit.cpp quit.h s_quote.cpp s_quote.h
+      subroutine.cpp subroutine.h throw.cpp throw.h
+      type.cpp type.h variable.cpp variable.h warm.cpp
+      warm.h zjump.cpp zjump.h
+
+  This was a difficult programming day -- lost the forest
+  for the trees.  Settled for a program that compiles and
+  seems to function (at least basically).
+
+  No obvious errors seen.
+
+  Cannot remember how this development started in Test instead
+  of regular -- the Test environment is easier to (yes ..) test
+  the effects of further coding.  The sense of it was, the
+  other day, once the Test suite was in place -- that it was in
+  its own way almost more to the point than the regular tree was.
+
+  On the other hand, the Test suite is kept more adherent to
+  YAFFA (uses multiple .ino files, for example):
+
+        0-Distribution.d      ainsuForthTest.ino      Dictionary.h
+        Dictionary.ino        doc                     Error_Codes.h
+        LICENSE               README.md               src
+        yaffa.h
+
+
 Thu Jun  8 04:03:40 UTC 2017
 
 ainsuForthTest/src/kernel/
